@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import {getTodo, getTodoById, updateTodo} from '../../../shared/api/todos';
+import { getTodo, getTodoById, updateTodo } from '../../../shared/api/todos';
 import { QueryParams, Todo } from '../../../shared/api/todos/model';
 
 class TaskStore {
@@ -43,19 +43,19 @@ class TaskStore {
       runInAction(() => {
         this.isLoading = false;
         this.task = data;
-      })
+      });
     } catch (error) {
       if (error instanceof Error) {
         runInAction(() => {
           this.isLoading = false;
           this.taskError = error.message;
-        })
+        });
       }
     }
-  }
+  };
 
   updateTodo = async (todo: Todo) => {
-    try{
+    try {
       this.isUpdateLoading = true;
       await updateTodo(todo);
       this.isUpdateLoading = false;
@@ -63,7 +63,7 @@ class TaskStore {
       this.isUpdateLoading = false;
       throw error;
     }
-  }
+  };
 }
 
-export default TaskStore;
+export const store = new TaskStore();
