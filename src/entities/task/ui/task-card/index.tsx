@@ -2,16 +2,16 @@ import { Card } from 'antd';
 import { ReactNode } from 'react';
 
 type Props = {
+  loading: boolean;
   title: string;
   text: string;
-  action: ReactNode;
+  actions?: ReactNode[];
 };
 
-export const TaskCard = ({ title, text, action }: Props) => {
+export const TaskCard = ({ title, text, actions, loading }: Props) => {
   return (
-    <Card title={title} extra={action} style={{ width: 300 }}>
+    <Card loading={loading} title={title} extra={actions} style={{ width: 500 }}>
       {text}
     </Card>
   );
 };
-
